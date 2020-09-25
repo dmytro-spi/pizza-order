@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 // import logo from './logo.svg';
-import './App.css';
+import './App.sass';
+import {Button} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Header from './component/Header/Header';
 
 // function App() {
-  
 //   return (
 //     <div className="App">
 //       <header className="App-header">
@@ -24,7 +26,7 @@ import './App.css';
 //   );
 // }
 
-class App extends Component {
+class App extends React.Component {
   state = {users: []}
 
   componentDidMount() {
@@ -36,10 +38,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header/>
         <h1>Users</h1>
-        {this.state.users.map(user =>
-          <div key={user.id}>{user.username}</div>
-        )}
+       <div>{this.state.users.map(user =>
+          <div key={user.id}>{user.username}</div>)}
+          </div>
+        
       </div>
     );
   }
