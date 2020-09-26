@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header/>
-        <h1>Users</h1>
+        <h1>Menu</h1>
        <div>{this.state.users.map(user =>
           <div key={user.id}>{user.username}</div>)}
           </div>

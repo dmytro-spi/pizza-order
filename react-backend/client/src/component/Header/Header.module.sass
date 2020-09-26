@@ -1,29 +1,30 @@
+$mainColor:  #fcc204
+  
 .AppLogo 
   
   display: grid
   justify-items: start
-  
   height: 15vh
-
-
-
 
 .AppHeader
   display: grid
   grid-template-columns: 1fr 1fr 1fr 1fr
-  // grid-template-rows: 1fr
-  background-color: #fcc204
+  background-color: $mainColor
   min-height: 10vh
   color: white
   .NavMenu
     display: grid
     grid-template-columns: 1fr 1fr 1fr 1fr
     grid-column: 2/5
-    background: #fcc204
+    background: $mainColor
     button
-      background: #fcc204
+      background: $mainColor
       border: 0px
-     
+      &:hover 
+        background: white
+      &:active 
+        background: white
+  
 
   .phone
     font-size: 20px
