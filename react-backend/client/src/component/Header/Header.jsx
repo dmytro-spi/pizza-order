@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink } from "react-bootstrap";
+
 import s from "./Header.module.sass";
 import logo from "../../assets/logo/logo.png";
+import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
   return (
@@ -21,9 +22,10 @@ const Header = (props) => {
         <NavLink to={""}>Регистрация</NavLink>
       </div>
       <div className={s.NavMenu}>
-        <button ><NavLink to={""}>Пицца</NavLink></button>
-        <button><NavLink to={""}>Напитки</NavLink></button>
-        <button><NavLink to={""}>О нас</NavLink></button>
+        
+        <NavLink to={"/pizza"} activeClassName={s.activeLink}><button type="button">Пицца</button></NavLink>
+        <NavLink to={"/drinks"} activeClassName={s.activeLink}><button type="button">Напитки</button></NavLink>
+        <NavLink to={"/aboutUs"} activeClassName={s.activeLink}><button type="button">О нас</button></NavLink>
         
       </div>
     </div>
