@@ -7,6 +7,7 @@ import Header from "./component/Header/Header";
 import Pizza from "./component/Pizza/Pizza"
 import Drinks from "./component/Drinks/Drinks";
 import AboutUs from "./component/AboutUs/AboutUs";
+import PizzaContainer from "./component/Pizza/PizzaContainer";
 
 // function App() {
 //   return (
@@ -42,13 +43,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <h1>Menu</h1>
-        <div>
+        <h1>MENU</h1>
+        <div >
           {/* {this.state.users.map((user) => (
             <div key={user.id}>{user.username}</div>
           ))} */}
 
-          <Route path="/pizza" render={() => <Pizza/>} />
+          <Route path="/pizza" render={() => <PizzaContainer/>} />
           <Route path="/drinks" render={() => <Drinks/>} />
           <Route path="/aboutus" render={() => <AboutUs/>} />
         </div>
