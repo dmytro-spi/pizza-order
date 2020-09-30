@@ -2,12 +2,11 @@ import React from "react";
 // import logo from './logo.svg';
 import "./App.sass";
 import { Route } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "./component/Header/Header";
-import Pizza from "./component/Pizza/Pizza"
 import Drinks from "./component/Drinks/Drinks";
 import AboutUs from "./component/AboutUs/AboutUs";
 import PizzaContainer from "./component/Pizza/PizzaContainer";
+
 
 // function App() {
 //   return (
@@ -34,9 +33,12 @@ class App extends React.Component {
   state = { users: [] };
 
   componentDidMount() {
+
+    
     fetch("/users")
       .then((res) => res.json())
-      .then((users) => this.setState({ users }));
+      .then((users) => {
+        this.setState({ users })});
   }
 
   render() {
@@ -44,14 +46,14 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <h1>MENU</h1>
-        <div >
+        <div>
           {/* {this.state.users.map((user) => (
             <div key={user.id}>{user.username}</div>
           ))} */}
 
           <Route path="/pizza" render={() => <PizzaContainer/>} />
-          <Route path="/drinks" render={() => <Drinks/>} />
-          <Route path="/aboutus" render={() => <AboutUs/>} />
+          <Route path="/drinks" render={() => <Drinks />} />
+          <Route path="/aboutus" render={() => <AboutUs />} />
         </div>
       </div>
     );

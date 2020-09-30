@@ -1,13 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { getPizza } from "../redux/pizza-reducer";
 import Pizza from "./Pizza";
 
-import s from "./Pizza.module.sass";
-
-
-
 class PizzaContainer extends React.Component {
+
+componentDidMount(){
+  this.props.getPizza();
+}
 
   render() {
     return (
@@ -24,5 +25,5 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-  connect(mapStateToProps)
-)(PizzaContainer);
+  connect(mapStateToProps, {getPizza})
+  )(PizzaContainer);

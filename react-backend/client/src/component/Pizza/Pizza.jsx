@@ -1,26 +1,34 @@
 import React from "react";
-
-import s from "./Pizza.module.sass";
+import { NavLink } from "react-router-dom";
+import s from "./Product.module.sass";
 
 const Pizza = (props) => {
-  debugger;
+
   return (
     <div className={s.pizzaProduct}>
       {props.pizza.map((p) => {
         return (
-          <div>
-            <span>
+          <div className={s.product}>
+            <div>
               <img src={p.img} />
-            </span>
-            <span>
-              <span>
+            </div>
+            <div>
+              <div>
                 <h3>{p.pizzaName}</h3>
-              </span>
-              <span>
+                <ul>
+                  {p.composition.map((c) => {
+                    return (
+                      <div>
+                        <li>{c}</li>
+                      </div>
+                    );
+                  })}
+                </ul>
+                
                 <h5>Цена {p.price}</h5>
-              </span>
-              
-            </span>
+                <NavLink to={"#"} activeClassName={s.submit}>Заказать</NavLink>
+              </div>
+            </div>
           </div>
         );
       })}

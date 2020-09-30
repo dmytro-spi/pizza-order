@@ -1,26 +1,32 @@
-const GET_PIZZA = "GET_PIZZA";
+import { productAPI } from "../../api/api";
 
-const imgDir = "https://www.pizzaking.ua/resizer/resize/upload/catalog/e/e7c6ce8e7bffbd7fc86a4c119262da24-472-472-c.jpg"
+const SET_PIZZA = "SET_PIZZA";
 
 const initialState = {
-    pizza: [
-        {id: 1, pizzaName: "Paperoni", img: imgDir, price: 120},
-        {id: 2, pizzaName: "Margarita", img: imgDir, price: 120},
-        {id: 3, pizzaName: "Diablo", img: imgDir, price: 120}
-    ]
-}
+  pizza: [],
+};
 
-export const getPizza = (quantity) =>({type: GET_PIZZA, quantity})
+export const setPizza = (pizzas) => ({ type: SET_PIZZA, pizzas });
 
 export const pizzaReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_PIZZA:
-            return state;
-                
-        default:
-            
-            return state;
-    }
-}
+  switch (action.type) {
+    case SET_PIZZA:
+        
+      return { ...state, pizza: action.pizzas };
+
+    default:
+      return state;
+  }
+};
+
+export const getPizza = () => {
+  return (dispatch) => {
+    productAPI.getPizzaProduct()
+     
+      .then((pizzas) => {
+        dispatch(setPizza(pizzas));
+      });
+  };
+};
 
 export default pizzaReducer;
