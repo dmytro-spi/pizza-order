@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { getPizza } from "../redux/pizza-reducer";
+import { loadPizza } from "../../store/pizza/actions";
 import Pizza from "./Pizza";
 
 class PizzaContainer extends React.Component {
 
 componentDidMount(){
-  this.props.getPizza();
+  this.props.loadPizza();
 }
 
   render() {
@@ -19,11 +19,9 @@ componentDidMount(){
 }
 
 let mapStateToProps = (state) => ({
-  
   pizza: state.pizzaPage.pizza
 });
 
-
 export default compose(
-  connect(mapStateToProps, {getPizza})
+  connect(mapStateToProps, {loadPizza})
   )(PizzaContainer);

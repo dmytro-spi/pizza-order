@@ -17,9 +17,9 @@ const Header = (props) => {
       </div>
       <div> Корзина </div>
       <div>
-        <NavLink to={""}>Вход </NavLink>
+        <NavLink to={"/login"}>Вход </NavLink>
 
-        <NavLink to={""}>Регистрация</NavLink>
+        <NavLink to={"/login"}>Регистрация</NavLink>
       </div>
       <div className={s.NavMenu}>
         

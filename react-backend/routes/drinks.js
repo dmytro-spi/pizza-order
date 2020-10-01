@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const imgDir =
-  "https://www.pizzaking.ua/resizer/resize/upload/catalog/e/e7c6ce8e7bffbd7fc86a4c119262da24-472-472-c.jpg";
+  "https://img3.zakaz.ua/upload.version_1.0.5dc6fc3e19afe3b7fd26255af0e26d88.350x350.jpeg";
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {

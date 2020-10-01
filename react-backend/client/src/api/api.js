@@ -4,5 +4,7 @@ export const productAPI = {
       
   },
 
-  getDrinkProduct() {},
+  getDrinkProduct() {
+    return fetch("/drinks").then((res) => res.json())
+  },
 };

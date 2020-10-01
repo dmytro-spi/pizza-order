@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import s from "./Product.module.sass";
+import s from "../Product.module.sass";
 
 const Pizza = (props) => {
 
   return (
-    <div className={s.pizzaProduct}>
+    <div className={s.oneProduct}>
       {props.pizza.map((p) => {
         return (
           <div className={s.product}>
@@ -25,7 +25,7 @@ const Pizza = (props) => {
                   })}
                 </ul>
                 
-                <h5>Цена {p.price}</h5>
+                <h5>Цена {p.price} ₴</h5>
                 <NavLink to={"#"} activeClassName={s.submit}>Заказать</NavLink>
               </div>
             </div>

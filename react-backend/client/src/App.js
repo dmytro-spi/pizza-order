@@ -3,9 +3,11 @@ import React from "react";
 import "./App.sass";
 import { Route } from "react-router-dom";
 import Header from "./component/Header/Header";
-import Drinks from "./component/Drinks/Drinks";
 import AboutUs from "./component/AboutUs/AboutUs";
 import PizzaContainer from "./component/Pizza/PizzaContainer";
+import DrinksContainer from "./component/Drinks/DrinksContainer";
+import Login from "./component/Login/Login";
+
 
 
 // function App() {
@@ -45,15 +47,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <h1>MENU</h1>
+        
         <div>
           {/* {this.state.users.map((user) => (
             <div key={user.id}>{user.username}</div>
           ))} */}
 
           <Route path="/pizza" render={() => <PizzaContainer/>} />
-          <Route path="/drinks" render={() => <Drinks />} />
+          <Route path="/drinks" render={() => <DrinksContainer />} />
           <Route path="/aboutus" render={() => <AboutUs />} />
+          <Route path="/login" render={() => <Login />} />
         </div>
       </div>
     );
