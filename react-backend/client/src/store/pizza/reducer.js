@@ -1,4 +1,4 @@
-import { SET_PIZZA } from "./actions";
+import { SET_PIZZA } from './actions';
 
 const initialState = {
   pizza: [],
@@ -12,6 +12,5 @@ export const pizzaReducer = (state = initialState, action) => {
       return state;
   }
 };
-
 
 export default pizzaReducer;

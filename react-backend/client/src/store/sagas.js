@@ -1,7 +1,9 @@
-import { takeEvery, put, call, all } from "redux-saga/effects";
-import { productAPI } from "../api/api";
-import { LOAD_DRINK, setDrink } from "./drinks/actions";
-import { LOAD_PIZZA, setPizza } from "./pizza/actions";
+import {
+  takeEvery, put, call, all,
+} from 'redux-saga/effects';
+import { productAPI } from '../api/api';
+import { LOAD_DRINK, setDrink } from './drinks/actions';
+import { LOAD_PIZZA, setPizza } from './pizza/actions';
 
 function* workerLoadPizza() {
   const data = yield call(productAPI.getPizzaProduct);
@@ -11,8 +13,6 @@ function* workerLoadPizza() {
 export function* watchLoadPizza() {
   yield takeEvery(LOAD_PIZZA, workerLoadPizza);
 }
-
-
 
 function* workerLoadDrink() {
   const data = yield call(productAPI.getDrinkProduct);
@@ -26,6 +26,6 @@ export function* watchLoadDrink() {
 export default function* rootSaga() {
   yield all([
     watchLoadDrink(),
-    watchLoadPizza()
-  ])
+    watchLoadPizza(),
+  ]);
 }
