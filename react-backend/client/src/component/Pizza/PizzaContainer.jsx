@@ -8,6 +8,7 @@ class PizzaContainer extends React.Component {
 
 componentDidMount(){
   this.props.loadPizza();
+  
 }
 
   render() {
@@ -20,6 +21,7 @@ componentDidMount(){
 
 let mapStateToProps = (state) => ({
   pizza: state.pizzaPage.pizza
+  
 });
 
 export default compose(

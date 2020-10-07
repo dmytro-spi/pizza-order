@@ -4,6 +4,15 @@ export const productAPI = {
       
   },
 
+  getPizzaId(){
+
+  },
+  getPizzaProfile(id) {
+    
+    return fetch(`/pizzas/${id}`).then((res) => res.json())
+      
+  },
+
   getDrinkProduct() {
     return fetch("/drinks").then((res) => res.json())
   },

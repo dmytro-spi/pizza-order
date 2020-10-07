@@ -8,6 +8,12 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const pizzasRouter = require('./routes/pizzas');
 const drinksRouter = require('./routes/drinks');
+const pizzaData = require('./db/pizza');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://dimon:mongo123@clusterpizzaorder.z0n3a.mongodb.net/pizza?retryWrites=true&w=majority', 
+{useNewUrlParser: true,
+  useUnifiedTopology: true});
+
 
 const app = express();
 
@@ -24,11 +30,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pizzas', pizzasRouter);
+
+app.get('/pizzas/:id', (req, res) => {
+  let id = req.params.id;
+
+  let pizzaById = pizzaData.getpizzaById(id);
+ res.json(pizzaById);
+
+});
 app.use('/drinks', drinksRouter);
 
-app.get("/news/:id", function (req, res) {
-  res.render("news", { newsId: req.params.id });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("work");
 });
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
