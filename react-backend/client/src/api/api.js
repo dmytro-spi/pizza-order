@@ -1,7 +1,6 @@
 export const productAPI = {
   getPizzaProduct() {
-    return fetch("/pizzas").then((res) => res.json())
-      
+    return fetch('/pizzas').then((res) => res.json());
   },
 
   getPizzaId(){
@@ -14,6 +13,6 @@ export const productAPI = {
   },
 
   getDrinkProduct() {
-    return fetch("/drinks").then((res) => res.json())
+    return fetch('/drinks').then((res) => res.json());
   },
 };

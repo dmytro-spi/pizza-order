@@ -1,5 +1,4 @@
-
-import {  SET_DRINK } from "./actions";
+import { SET_DRINK } from './actions';
 
 const initialState = {
   drinks: [],
@@ -13,7 +12,5 @@ export const drinkReducer = (state = initialState, action) => {
       return state;
   }
 };
-
-
 
 export default drinkReducer;
