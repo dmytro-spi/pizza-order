@@ -3,9 +3,7 @@ export const productAPI = {
     return fetch('/pizzas').then((res) => res.json());
   },
 
-  getPizzaId(){
-
-  },
+  
   getPizzaProfile(id) {
     
     return fetch(`/pizzas/${id}`).then((res) => res.json())
