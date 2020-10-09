@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -42,7 +43,7 @@ app.use('/drinks', drinksRouter);
 
 async function start(){
   try {
-    await mongoose.connect('mongodb+srv://dimon:mongo123@clusterpizzaorder.z0n3a.mongodb.net/pizza?retryWrites=true&w=majority', 
+    await mongoose.connect(process.env.MONGOAPIKEY, 
     {useNewUrlParser: true,
       useUnifiedTopology: true});
       console.log("work");
