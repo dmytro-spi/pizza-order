@@ -26,7 +26,7 @@ const Pizza = (props) => {
                   );
                 })}
               </ul>
-              <h5>Цена {p.price} ₴</h5>
+              <h3>Цена {p.price} ₴</h3>
               <NavLink to={"#"} activeClassName={s.submit} className={s.but}>
                 Заказать
               </NavLink>

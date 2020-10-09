@@ -19,7 +19,7 @@ const Drink = (props) => {
                 <h3>{d.drinkName}</h3>
                 
                 <h5>Цена {d.price} ₴</h5>
-                <NavLink to={"#"} activeClassName={style.submit}>Заказать</NavLink>
+                <NavLink to={"#"} activeClassName={style.submit} className={style.but}>Заказать</NavLink>
               </div>
             </div>
           </div>

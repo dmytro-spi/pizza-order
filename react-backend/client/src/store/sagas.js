@@ -1,5 +1,6 @@
 import { takeEvery, put, call, all } from "redux-saga/effects";
-import { productAPI } from "../api/api";
+import { authAPI, productAPI } from "../api/api";
+import { LOAD_AUTH } from "./auth/actions";
 import { LOAD_DRINK, setDrink } from "./drinks/actions";
 import {
   GET_PIZZA_BY_ID,
@@ -8,6 +9,7 @@ import {
   setPizzaProfile,
 } from "./pizza/actions";
 
+//Загрузка массива пицц
 function* workerLoadPizza() {
   const data = yield call(productAPI.getPizzaProduct);
   yield put(setPizza(data));
@@ -41,9 +43,26 @@ function* workerLoadDrink() {
 }
 
 export function* watchLoadDrink() {
+  
   yield takeEvery(LOAD_DRINK, workerLoadDrink);
 }
 
+
+//Регистрация
+function* workerRegistration(loginData) {
+  yield call(authAPI.login(loginData));
+  
+}
+
+export function* watchRegistration() {
+  yield takeEvery(LOAD_AUTH, workerRegistration);
+  
+}
+
 export default function* rootSaga() {
-  yield all([watchLoadDrink(), watchLoadPizzaProfile(), watchLoadPizza()]);
+  yield all([watchLoadDrink(), 
+    watchLoadPizzaProfile(), 
+    watchLoadPizza(),
+    watchRegistration(),
+  ]);
 }

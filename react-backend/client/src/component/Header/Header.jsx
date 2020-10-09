@@ -19,7 +19,7 @@ const Header = (props) => {
       <div>
         <NavLink to={"/login"}>Вход </NavLink>
 
-        <NavLink to={"/login"}>Регистрация</NavLink>
+        <NavLink to={"/registration"}>Регистрация</NavLink>
       </div>
       <div className={s.NavMenu}>
         

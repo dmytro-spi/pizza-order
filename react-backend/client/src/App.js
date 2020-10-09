@@ -8,6 +8,8 @@ import PizzaContainer from "./component/Pizza/PizzaContainer";
 import DrinksContainer from "./component/Drinks/DrinksContainer";
 import Login from "./component/Login/Login";
 import PizzaProfileContainer from "./component/Pizza/PizzaProfile/PizzaProfileContainer";
+import RegistrationContainer from "./component/Login/RegistrationContainer";
+
 
 
 
@@ -38,6 +40,7 @@ class App extends React.Component {
           <Route path="/drinks" render={() => <DrinksContainer />} />
           <Route path="/aboutus" render={() => <AboutUs />} />
           <Route path="/login" render={() => <Login />} />
+          <Route path="/registration" render={() => <RegistrationContainer />} />
         </div>
       </div>
     );
