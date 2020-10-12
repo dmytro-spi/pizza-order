@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import s from "../Product.module.sass";
 
 const Pizza = (props) => {
+  
   return (
     <div className={s.oneProduct}>
       {props.pizza.map((p) => {

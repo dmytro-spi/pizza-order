@@ -10,23 +10,31 @@ const Header = (props) => {
       <div>
         <img className={s.AppLogo} src={logo} />
       </div>
-      <div className={s.phone}> 
+      <div className={s.phone}>
         <div>099 166 61 21</div>
         <div>067 166 61 21</div>
         <div>063 166 61 21</div>
       </div>
       <div> Корзина </div>
-      <div>
-        <NavLink to={"/login"}>Вход </NavLink>
+      {props.login ? (
+        <div>{`Привет ${props.login}`}</div>
+      ) : (
+        <div>
+          <NavLink to={"/login"}>Вход </NavLink>
 
-        <NavLink to={"/registration"}>Регистрация</NavLink>
-      </div>
+          <NavLink to={"/registration"}>Регистрация</NavLink>
+        </div>
+      )}
       <div className={s.NavMenu}>
-        
-        <NavLink to={"/pizza"} activeClassName={s.activeLink}><button type="button">Пицца</button></NavLink>
-        <NavLink to={"/drinks"} activeClassName={s.activeLink}><button type="button">Напитки</button></NavLink>
-        <NavLink to={"/aboutUs"} activeClassName={s.activeLink}><button type="button">О нас</button></NavLink>
-        
+        <NavLink to={"/pizza"} activeClassName={s.activeLink}>
+          <button type="button">Пицца</button>
+        </NavLink>
+        <NavLink to={"/drinks"} activeClassName={s.activeLink}>
+          <button type="button">Напитки</button>
+        </NavLink>
+        <NavLink to={"/aboutUs"} activeClassName={s.activeLink}>
+          <button type="button">О нас</button>
+        </NavLink>
       </div>
     </div>
   );

@@ -17,16 +17,48 @@ export const productAPI = {
 
 export const authAPI = {
   
-  async login(loginData) {
+  async registration(loginData) {
       
     const response = await fetch('/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(loginData.loginData)
+      body: JSON.stringify(loginData)
       
     });
+    const userData = await response.json();
+    
+    return userData;
+  },
+
+  async login(loginData) {
+      debugger
+    const response = await fetch('/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(loginData)
+      
+    });
+    
+    const token = await response.json();
+    debugger
+    return token;
+  },
+  async me(storedJwt) {
+    
+    const response = await fetch('/me', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: storedJwt
+      // credentials: 'include'
+      
+    });
+    
     const userData = await response.json();
     
     return userData;

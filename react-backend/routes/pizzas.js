@@ -4,7 +4,7 @@ const router = express.Router();
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   // res.send("respond with a resource");
-
+   
   res.json([
     {id: 1, pizzaName: "Paperoni", img: "https://holyfood.com.ua/wp-content/uploads/2018/11/pizza-pizza-peperoni.jpg", price: 150, composition: ["Колбаса пепперони", "сыр моцарелла", "томатный соус"]},
     {id: 2, pizzaName: "Margarita", img: "https://holyfood.com.ua/wp-content/uploads/2018/11/pizza-pizza-margarita.jpg", price: 120, composition: ["томатный соус", "сыр Моцарелла", "помидор"]},

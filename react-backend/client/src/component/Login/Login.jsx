@@ -6,13 +6,16 @@ import style from "./Login.module.sass";
 const Login = (props) => {
 
     const onSubmit = (formData) => {
-      console.log(formData)
+     
+      props.loadLogin(formData);
+      
     }
     
       return (
         <div>
           <h1>Вход</h1>
-          <LoginReduxForm onSubmit={onSubmit}/>
+          <LoginReduxForm onSubmit={onSubmit}
+          message={props.message}/>
         </div>
       );
     };
@@ -22,10 +25,13 @@ const Login = (props) => {
       return (
         <form onSubmit={props.handleSubmit}>
           <div>
-            <Field placeholder={"email"} name={"login"} component={"input"} />
+            <Field placeholder={"email"} name={"email"} component={"input"} />
           </div>
           <div>
             <Field placeholder={"пароль"} name={"password"} component={"input"} />
+          </div>
+          <div>
+            {props.message && <h5>{props.message}</h5>}
           </div>
           <div>
             <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> запомнить меня

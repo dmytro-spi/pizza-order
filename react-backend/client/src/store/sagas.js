@@ -1,6 +1,6 @@
 import { takeEvery, put, call, all } from "redux-saga/effects";
 import { authAPI, productAPI } from "../api/api";
-import { LOAD_AUTH } from "./auth/actions";
+import { LOAD_AUTH, LOAD_LOGIN, LOAD_LOGOUT, LOAD_ME, setLoadMeData, setMessage, setToken } from "./auth/actions";
 import { LOAD_DRINK, setDrink } from "./drinks/actions";
 import {
   GET_PIZZA_BY_ID,
@@ -49,8 +49,11 @@ export function* watchLoadDrink() {
 
 
 //Регистрация
-function* workerRegistration(loginData) {
-  yield call(authAPI.login(loginData));
+function* workerRegistration(action) {
+  
+  const data = yield call(authAPI.registration, action.loginData);
+  
+  yield put(setMessage(data.message, data.isRegistrate))
   
 }
 
@@ -59,10 +62,39 @@ export function* watchRegistration() {
   
 }
 
+//Логинизация
+function* workerLogin(action) {
+  const data = yield call(authAPI.login, action.loginData);
+  yield put(setToken(data))
+}
+
+export function* watchLogin() {
+  yield takeEvery(LOAD_LOGIN, workerLogin);
+  
+}
+
+// Проверка логинизации
+function* workerMe(action) {
+  
+  const data = yield call(authAPI.me, 
+    action.token
+    );
+    debugger
+  yield put(setLoadMeData(data))
+}
+export function* watchMe() {
+  
+  yield takeEvery(LOAD_ME, workerMe);
+  
+}
+
+
 export default function* rootSaga() {
   yield all([watchLoadDrink(), 
     watchLoadPizzaProfile(), 
     watchLoadPizza(),
     watchRegistration(),
+    watchLogin(),
+    watchMe()
   ]);
 }

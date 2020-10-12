@@ -3,21 +3,30 @@ import { Field, reduxForm } from "redux-form";
 
 import style from "./Login.module.sass";
 
+let formD = null;
 const Registration = (props) => {
+  
   const onSubmit = (formData) => {
-    console.log(formData);
+    formD = formData;
     props.loadAuth(formData);
+    
   };
+
+  // if (props.isRegistrate) {
+  //   debugger
+  //   props.loadLogin(formD);
+  // }
 
   return (
     <div>
       <h1>Регистрация</h1>
-      <LoginReduxForm onSubmit={onSubmit} />
+      <LoginReduxForm onSubmit={onSubmit} message={props.message}/>
     </div>
   );
 };
 
 const RegistrationForm = (props) => {
+  
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
@@ -30,6 +39,10 @@ const RegistrationForm = (props) => {
           component={"input"}
         />
       </div>
+      {props.message && 
+        <h5>{props.message}</h5>
+        
+      }
 
       <div>
         <Field type={"checkbox"} name={"rememberMe"} component={"input"} />{" "}
