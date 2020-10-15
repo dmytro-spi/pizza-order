@@ -64,6 +64,7 @@ export function* watchRegistration() {
 
 //Логинизация
 function* workerLogin(action) {
+  debugger
   const data = yield call(authAPI.login, action.loginData);
   yield put(setToken(data))
 }

@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
 // /auth/login
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -45,6 +45,8 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Неверный пароль" });
     }
     // generateToken(res, email);
+    const expires = rememberMe ? "1d" : "12h";
+
     const token = jwt.sign(
       {userId: user.id},
       process.env.JWT_SECRET,

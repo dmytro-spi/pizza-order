@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { localStorageName } from "../store/auth/reducer";
-import { loadLogin } from "../store/auth/actions";
 
 export const withAuthredirect = (Component) => {
     
@@ -10,15 +9,14 @@ export const withAuthredirect = (Component) => {
 
   class RedirectComponent extends React.Component {
     render() {
-      if (!auth) return <Redirect to={"/login"} />;
-        // loadLogin(auth.login, auth.pass);
+      if (this.props.isRegistrate) return <Redirect to={"/pizza"} />;
       return <Component {...this.props} />;
     }
   }
 
   let mapStateToProps = (state) => {
     return {
-      isAuth: state.auth.isAuth,
+      isRegistrate: state.authPage.isRegistrate,
     };
   };
 

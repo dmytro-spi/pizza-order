@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { loadMe } from "../../store/auth/actions";
+import { loadMe, removeToken } from "../../store/auth/actions";
 import { localStorageName } from "../../store/auth/reducer";
 import Header from "./Header";
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-    if (!this.props.login) {
+    if (!this.props.isRegistrate) {
       const localToken = localStorage.getItem(localStorageName);
-      
+      debugger
       if (localToken) {
         this.props.loadMe(localToken);
       }
@@ -23,6 +23,7 @@ class HeaderContainer extends React.Component {
         {...this.props}
         login={this.props.login}
         loadMe={this.props.loadMe}
+        removeToken={this.props.removeToken}
       />
     );
   }
@@ -30,6 +31,7 @@ class HeaderContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
   login: state.authPage.login,
+  isRegistrate:state.authPage.isRegistrate,
 });
 
-export default compose(connect(mapStateToProps, { loadMe }))(HeaderContainer);
+export default compose(connect(mapStateToProps, { loadMe, removeToken }))(HeaderContainer);

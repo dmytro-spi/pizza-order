@@ -13,7 +13,7 @@ async (req, res, next) => {
   try {
     
     const token = req.body.token;
-    
+    // console.log(document.cookie)
     // const s = JSON.stringify(token);
     const decoded =  jwt.verify(token , process.env.JWT_SECRET);
     

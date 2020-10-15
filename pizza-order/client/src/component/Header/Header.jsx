@@ -4,7 +4,15 @@ import s from "./Header.module.sass";
 import logo from "../../assets/logo/logo.png";
 import { NavLink } from "react-router-dom";
 
+
+
 const Header = (props) => {
+
+  const logout= () =>{
+    
+    props.removeToken()
+    
+  }
   return (
     <div className={s.AppHeader}>
       <div>
@@ -17,7 +25,7 @@ const Header = (props) => {
       </div>
       <div> Корзина </div>
       {props.login ? (
-        <div>{`Привет ${props.login}`}</div>
+        <div>{`Привет ${props.login} `}<button onClick={logout} >выход</button></div>
       ) : (
         <div>
           <NavLink to={"/login"}>Вход </NavLink>

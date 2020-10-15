@@ -2,7 +2,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { loadAuth, loadLogin } from "../../store/auth/actions";
+import { withAuthredirect } from "../../hoc/withAuthRedirect";
+import { loadAuth, loadLogin, setMessage } from "../../store/auth/actions";
 import Registration from "./Registration";
 
 class RegistrationContainer extends React.Component {
@@ -13,8 +14,9 @@ class RegistrationContainer extends React.Component {
       <Registration {...this.props}
       state={this.props.state}
       message={this.props.message}
-      // isRegistrate={this.props.isRegistrate}
-      // loadLogin={this.props.loadLogin}
+      setMessage={this.props.setMessage}
+      isRegistrate={this.props.isRegistrate}
+      loadLogin={this.props.loadLogin}
       />
       
     );
@@ -29,6 +31,7 @@ let mapStateToProps = (state) => ({
 
 export default compose(
   connect(mapStateToProps, {loadAuth, 
-    // loadLogin
+    loadLogin,
+    setMessage
   })
   )(RegistrationContainer);

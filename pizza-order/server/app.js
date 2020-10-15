@@ -40,7 +40,8 @@ app.get("/pizzas/:id", (req, res) => {
   res.json(pizzaById);
 });
 app.use("/drinks", drinksRouter);
-
+process.env.MONGOAPIKEY
+process.env.JWT_SECRET
 async function start() {
   try {
     await mongoose.connect(process.env.MONGOAPIKEY, {
