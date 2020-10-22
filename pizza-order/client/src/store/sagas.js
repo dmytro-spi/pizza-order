@@ -1,7 +1,7 @@
 import { takeEvery, put, call, all } from "redux-saga/effects";
 import { authAPI, productAPI } from "../api/api";
 import { LOAD_AUTH, LOAD_LOGIN, LOAD_LOGOUT, LOAD_ME, setLoadMeData, setMessage, setToken } from "./auth/actions";
-import { LOAD_DRINK, setDrink } from "./drinks/actions";
+import { GET_DRINK_BY_ID, LOAD_DRINK, setDrink, setDrinkProfile } from "./drinks/actions";
 import {
   GET_PIZZA_BY_ID,
   LOAD_PIZZA,
@@ -9,9 +9,10 @@ import {
   setPizzaProfile,
 } from "./pizza/actions";
 
-//Загрузка массива пицц
+//Loading array of pizza
 function* workerLoadPizza() {
   const data = yield call(productAPI.getPizzaProduct);
+  
   yield put(setPizza(data));
 }
 
@@ -20,15 +21,11 @@ export function* watchLoadPizza() {
 }
 
 
-//загрузка профиля пиццы
-function* workerLoadPizzaProfile(id) {
-  const pizza = yield call(productAPI.getPizzaProduct);
-  let pizzaProfile;
-  pizza.forEach(element => {
-    if (element.id == id.id) {
-      pizzaProfile = element;
-    }
-  });
+//Loading profile of pizza
+function* workerLoadPizzaProfile(action) {
+  
+  const pizzaProfile = yield call(productAPI.getPizzaProfile, action.id);
+  
   yield put(setPizzaProfile(pizzaProfile));
 }
 export function* watchLoadPizzaProfile() {
@@ -36,7 +33,7 @@ export function* watchLoadPizzaProfile() {
 }
 
 
-//загрузка всех напитков
+//Loading array of drinks
 function* workerLoadDrink() {
   const data = yield call(productAPI.getDrinkProduct);
   yield put(setDrink(data));
@@ -48,7 +45,19 @@ export function* watchLoadDrink() {
 }
 
 
-//Регистрация
+//Loading profile of drink
+function* workerLoadDrinkProfile(action) {
+  const drinkProfile = yield call(productAPI.getDrinkProfile, action.id);
+  
+  yield put(setDrinkProfile(drinkProfile));
+}
+export function* watchLoadDrinkProfile() {
+  yield takeEvery(GET_DRINK_BY_ID, workerLoadDrinkProfile);
+}
+
+
+
+//Registration
 function* workerRegistration(action) {
   
   const data = yield call(authAPI.registration, action.loginData);
@@ -62,9 +71,9 @@ export function* watchRegistration() {
   
 }
 
-//Логинизация
+//Login
 function* workerLogin(action) {
-  debugger
+  
   const data = yield call(authAPI.login, action.loginData);
   yield put(setToken(data))
 }
@@ -74,13 +83,13 @@ export function* watchLogin() {
   
 }
 
-// Проверка логинизации
+//Check me login
 function* workerMe(action) {
   
   const data = yield call(authAPI.me, 
     action.token
     );
-    debugger
+    
   yield put(setLoadMeData(data))
 }
 export function* watchMe() {
@@ -91,7 +100,8 @@ export function* watchMe() {
 
 
 export default function* rootSaga() {
-  yield all([watchLoadDrink(), 
+  yield all([watchLoadDrink(),
+    watchLoadDrinkProfile(),
     watchLoadPizzaProfile(), 
     watchLoadPizza(),
     watchRegistration(),

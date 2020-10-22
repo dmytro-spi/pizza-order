@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import s from "../../ProductProfile.module.sass";
 
 const PizzaProfile = (props) => {
-  
-  
+
+  const size25 = props.pizzaProfile.variableProduct.find(item => item.size == 25);
+  const size30 = props.pizzaProfile.variableProduct.find(item => item.size == 30);
+  const size35 = props.pizzaProfile.variableProduct.find(item => item.size == 35);
+  debugger
   return (
     <div className={s.product}>
       <div>
@@ -12,16 +15,16 @@ const PizzaProfile = (props) => {
       </div>
       <div>
         <div>
-          <h1>{props.pizzaProfile.pizzaName}</h1>
+          <h1>{props.pizzaProfile.name}</h1>
         </div>
 
         <ul>
           
-          {props.pizzaProfile.composition ? props.pizzaProfile.composition.map((element) => {
+          {props.pizzaProfile.composition.map((element) => {
             return <li>{element}</li>;
-          }) : null}
+          }) }
         </ul>
-        <h3>Цена {props.pizzaProfile.price} ₴</h3>
+        <h3>Цена {size25 ? size25.price : null} ₴</h3>
                 <NavLink to={"#"} activeClassName={s.submit} className={s.but}>
                   Заказать
                 </NavLink>

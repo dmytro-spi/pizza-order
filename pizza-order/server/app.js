@@ -8,7 +8,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 
 const meRouter = require("./routes/me");
-const pizzasRouter = require("./routes/pizzas");
+const productRouter = require("./routes/product");
 const drinksRouter = require("./routes/drinks");
 const pizzaData = require("./db/pizza");
 const authRouter = require("./routes/auth");
@@ -30,18 +30,16 @@ app.use(express.static(path.join(__dirname, "public")));
 //   })
 // );
 
-// app.use("/users", usersRouter);
-app.use("/pizzas", pizzasRouter);
+app.use("/product", productRouter);
 app.use("/auth", authRouter);
 app.use("/me", meRouter);
-app.get("/pizzas/:id", (req, res) => {
-  let id = req.params.id;
-  let pizzaById = pizzaData.getpizzaById(id);
-  res.json(pizzaById);
-});
+// app.get("/pizzas/:id", (req, res) => {
+//   let id = req.params.id;
+//   let pizzaById = pizzaData.getpizzaById(id);
+//   res.json(pizzaById);
+// });
 app.use("/drinks", drinksRouter);
-process.env.MONGOAPIKEY
-process.env.JWT_SECRET
+
 async function start() {
   try {
     await mongoose.connect(process.env.MONGOAPIKEY, {

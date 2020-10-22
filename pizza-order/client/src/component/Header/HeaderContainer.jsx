@@ -9,7 +9,7 @@ class HeaderContainer extends React.Component {
   componentDidMount() {
     if (!this.props.isRegistrate) {
       const localToken = localStorage.getItem(localStorageName);
-      debugger
+     
       if (localToken) {
         this.props.loadMe(localToken);
       }
@@ -24,6 +24,7 @@ class HeaderContainer extends React.Component {
         login={this.props.login}
         loadMe={this.props.loadMe}
         removeToken={this.props.removeToken}
+        cart={this.props.cart}
       />
     );
   }
@@ -32,6 +33,7 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => ({
   login: state.authPage.login,
   isRegistrate:state.authPage.isRegistrate,
+  cart:state.authPage.cart,
 });
 
 export default compose(connect(mapStateToProps, { loadMe, removeToken }))(HeaderContainer);

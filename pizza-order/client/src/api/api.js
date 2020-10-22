@@ -1,16 +1,18 @@
 export const productAPI = {
   getPizzaProduct() {
-    return fetch('/pizzas').then((res) => res.json());
+    return fetch('/product/pizzas').then((res) => res.json());
   },
  
   getPizzaProfile(id) {
-    
-    return fetch(`/pizzas/${id}`).then((res) => res.json())
-      
+    return fetch(`/product/pizzas/${id}`).then((res) => res.json())
   },
 
   getDrinkProduct() {
-    return fetch('/drinks').then((res) => res.json());
+    return fetch('/product/drinks').then((res) => res.json());
+  },
+
+  getDrinkProfile(id) {
+    return fetch(`/product/pizzas/${id}`).then((res) => res.json())
   },
 };
 

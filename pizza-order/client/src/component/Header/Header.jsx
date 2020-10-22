@@ -2,17 +2,13 @@ import React from "react";
 
 import s from "./Header.module.sass";
 import logo from "../../assets/logo/logo.png";
+import cart from "../../assets/cart/cart.png";
 import { NavLink } from "react-router-dom";
 
-
-
 const Header = (props) => {
-
-  const logout= () =>{
-    
-    props.removeToken()
-    
-  }
+  const logout = () => {
+    props.removeToken();
+  };
   return (
     <div className={s.AppHeader}>
       <div>
@@ -23,9 +19,19 @@ const Header = (props) => {
         <div>067 166 61 21</div>
         <div>063 166 61 21</div>
       </div>
-      <div> Корзина </div>
+      <div>
+        <img className={s.AppCart} src={cart} />{" "}
+        {props.cart.length === 0 ? (
+          "Корзина пуста"
+        ) : (
+          <NavLink to={"/cart"}>{`В корзине: ${props.cart.length}`}</NavLink>
+        )}{" "}
+      </div>
       {props.login ? (
-        <div>{`Привет ${props.login} `}<button onClick={logout} >выход</button></div>
+        <div>
+          {`Привет ${props.login} `}
+          <button onClick={logout}>выход</button>
+        </div>
       ) : (
         <div>
           <NavLink to={"/login"}>Вход </NavLink>

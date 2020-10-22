@@ -5,21 +5,22 @@ import style from "../Product.module.sass";
 
 
 const Drink = (props) => {
-
+debugger
   return (
     <div className={style.oneProduct}>
       {props.drinks.map((d) => {
         return (
           <div className={style.product}>
             <div>
-              <img src={d.img} />
+              <NavLink to={`/drinks/${d._id}`}><img src={d.img} /></NavLink>
+              
             </div>
             <div>
               <div>
-                <h3>{d.drinkName}</h3>
-                
+                <NavLink to={`/drinks/${d._id}`}><h3>{d.name}</h3></NavLink>
+                <h5> {d.volume} л </h5>
                 <h5>Цена {d.price} ₴</h5>
-                <NavLink to={"#"} activeClassName={style.submit} className={style.but}>Заказать</NavLink>
+                <NavLink to={"#"} activeClassName={style.submit} className={style.but}>В корзину</NavLink>
               </div>
             </div>
           </div>

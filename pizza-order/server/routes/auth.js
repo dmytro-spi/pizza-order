@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const generateToken = require("../cookies/generateToken");
+const Product = require("../models/Product");
 
 
 // /auth/register
@@ -45,13 +46,14 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ message: "Неверный пароль" });
     }
     // generateToken(res, email);
-    const expires = rememberMe ? "1d" : "12h";
+    const expires = rememberMe ? "14d" : "12h";
 
     const token = jwt.sign(
       {userId: user.id},
       process.env.JWT_SECRET,
-      {expiresIn: '12h'}
+      {expiresIn: expires}
     )  
+
     res.json({token, 
       userId: user.id, 
       login: user.email, 

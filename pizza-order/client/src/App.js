@@ -8,10 +8,12 @@ import PizzaProfileContainer from "./component/Pizza/PizzaProfile/PizzaProfileCo
 import RegistrationContainer from "./component/Login/RegistrationContainer";
 import LoginContainer from "./component/Login/LoginContainer";
 import HeaderContainer from "./component/Header/HeaderContainer";
+import Cart from "./component/Cart/Cart";
+import CartContainer from "./component/Cart/CartContainer";
+import DrinkProfileContainer from "./component/Drinks/DrinkProfile/DrinkProfileContainer";
 
 
 class App extends React.Component {
-  // state = { users: [] };
   
   componentDidMount() {
     
@@ -30,9 +32,11 @@ class App extends React.Component {
 
           <Route exact path="/pizza/:id" render={() => <PizzaProfileContainer/>} />
           <Route exact path="/pizza" render={() => <PizzaContainer/>} />
-          <Route path="/drinks" render={() => <DrinksContainer />} />
+          <Route exact path="/drinks" render={() => <DrinksContainer />} />
+          <Route exact path="/drinks/:id" render={() => <DrinkProfileContainer />} />
           <Route path="/aboutus" render={() => <AboutUs />} />
           <Route path="/login" render={() => <LoginContainer />} />
+          <Route path="/cart" render={() => <CartContainer />} />
           <Route path="/registration" render={() => <RegistrationContainer />} />
         </div>
       </div>
