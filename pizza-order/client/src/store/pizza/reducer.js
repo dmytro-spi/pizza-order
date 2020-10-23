@@ -26,13 +26,14 @@ export const pizzaReducer = (state = initialState, action) => {
       return { ...state, pizzaProfile: action.pizzaProfile };
     }
     case CHANGE: {
-     debugger
-        let pizza = state.pizza.find(item => item._id == action.id);
-        let id = state.pizza.findIndex(item => item._id == action.id);
-        pizza = {...state.pizza[id],  price: action.change}
-        let allPizza = {...state.pizza, pizza}
-        const a = 5;
-      return { ...state, pizza: pizza };
+      const PizzaWithPrice = state.pizza.map(el => {
+        if (el._id == action.id) {
+        return el = {...el, price: action.change}
+      }
+      return el;
+    })
+        
+      return { ...state, pizza: PizzaWithPrice };
     }
     default:
       return state;
