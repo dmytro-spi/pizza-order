@@ -2,75 +2,71 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const generateToken = require("../cookies/generateToken");
-const authMiddleware = require("../middleware/auth.middleware");
+const generateToken = require("../utils/generateToken");
 
-// /auth/register
-router.post("/register", async (req, res) => {
-  try {
-    const { email, password, rememberMe } = req.body;
+export default router => {
+  // /auth/register
+  router.post("/register", async (req, res) => {
+    try {
+      const { email, password, rememberMe } = req.body;
 
-    const candidate = await User.findOne({ email });
-    if (candidate) {
-      return res
-        .status(400)
-        .json({ message: "Такой пользователь уже существует", 
-        // isRegistrate: false 
-      });
+      const candidate = await User.findOne({ email });
+      if (candidate) {
+        return res
+          .status(406)
+          .json({ message: "User exists",
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 12);
+      const user = await User.create({ email, password: hashedPassword });
+
+      await generateToken(res, email, rememberMe);
+      res.send();
+    } catch (e) {
+      res.status(500).json({ message: "Registration error", error: e });
     }
+  });
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = new User({ email, password: hashedPassword });
+  // /auth/login
+  router.post("/login", async (req, res) => {
+    try {
+      const { email, password, rememberMe } = req.body;
+      const user = await User.findOne({ email });
 
-    await user.save();
-    // res.status(201).json({ message: "Регистрация успешна", isRegistrate: true });
-    await generateToken(res, email, rememberMe);
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
 
-  } catch (e) {
-    
-    res.status(500).json({ message: "Ошибка регистрации", isRegistrate: false });
-  }
-});
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        // мы никогда не говорим что именно не верно: логин или пароль
+        return res.status(400).json({ message: "Authorization error" });
+      }
 
-// /auth/login
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password, rememberMe } = req.body;
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ message: "Пользователь не найден" });
+      await generateToken(res, email, rememberMe);
+      res.send();
+    } catch (err) {
+      res.status(500).json({ message: "Internal error", err });
     }
-      
-    const isMatch = await bcrypt.compare(password, user.password);
+  });
+  // /auth/logout
+  router.post("/logout", async (req, res) => {
+    const s = 28;
+    try {
+      const { email } = req.body;
+      const user = await User.findOne({ email });
 
-    if (!isMatch) {
-      return res.status(400).json({ message: "Неверный пароль" });
+      if (!user) {
+        return res.status(400).json({ message: "User not found" });
+      }
+
+      await generateToken(res, email);
+      res.json({ message: 'Logged out' });
+    } catch (e) {
+      res.status(500).json({ message: "Internal error" });
     }
-    await generateToken(res, email, rememberMe);
-    res.send('Set Cookie');
-    
-  } catch (e) {
-    res.status(500).json({ message: "Ошибка, капец!" });
-  }
-});
-// /auth/logout
-router.post("/logout", async (req, res) => {
-  const s = 28;
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
+  });
 
-    if (!user) {
-      return res.status(400).json({ message: "Пользователь не найден" });
-    }
-      
-    await generateToken(res, email);
-    res.send('Set Cookie');
-    
-  } catch (e) {
-    res.status(500).json({ message: "Ошибка, капец!" });
-  }
-});
-
-module.exports = router;
+  return router;
+};

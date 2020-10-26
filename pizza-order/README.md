@@ -1,10 +1,8 @@
-## PIZZA-ORDER 
-Для запуска проекта откройте два терминала в корне проекта.
-
-Команды для первого терминала
+## PIZZA-ORDER
+Run client
 cd client
-npm start 
+npm start
 
-Команды для второго терминала
+Run server
 cd server
-npm start 
+npm run dev | npm run prod
