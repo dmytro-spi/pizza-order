@@ -19,7 +19,7 @@ componentDidMount(){
   };
 
     onSubmit = (formData, dispatch) => {
-      debugger
+      
       this.props.loadLogin(formData);
       dispatch(reset("login"));
       setTimeout(this.removeMessage, 4000)

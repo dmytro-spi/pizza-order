@@ -74,8 +74,9 @@ export function* watchRegistration() {
 //Login
 function* workerLogin(action) {
   
-  const data = yield call(authAPI.login, action.loginData);
-  yield put(setToken(data))
+  // const data = 
+  yield call(authAPI.login, action.loginData);
+  // yield put(setToken(data))
 }
 
 export function* watchLogin() {
@@ -83,12 +84,22 @@ export function* watchLogin() {
   
 }
 
-//Check me login
-function* workerMe(action) {
+//Logout
+function* workerLogout(action) {
+  debugger
+  yield call(authAPI.logout, action.login);
   
-  const data = yield call(authAPI.me, 
-    action.token
-    );
+}
+
+export function* watchLogout() {
+  yield takeEvery(LOAD_LOGOUT, workerLogout);
+  
+}
+
+//Check me login
+function* workerMe() {
+  debugger
+  const data = yield call(authAPI.me);
     
   yield put(setLoadMeData(data))
 }
@@ -106,6 +117,7 @@ export default function* rootSaga() {
     watchLoadPizza(),
     watchRegistration(),
     watchLogin(),
+    watchLogout(),
     watchMe()
   ]);
 }

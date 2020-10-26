@@ -1,4 +1,6 @@
-import { REMOVE_TOKEN, SET_LOAD_ME_DATA, SET_MESSAGE, SET_TOKEN } from "./actions";
+import { LOAD_LOGOUT, SET_LOAD_ME_DATA, SET_MESSAGE, 
+  // SET_TOKEN 
+} from "./actions";
 
 const initialState = {
   
@@ -11,8 +13,6 @@ const initialState = {
   
 };
 
-export const localStorageName = "userData";
-
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MESSAGE:
@@ -21,25 +21,15 @@ export const authReducer = (state = initialState, action) => {
         message: action.message,
         isRegistrate: action.isRegistrate,
       };
-
-    case SET_TOKEN:
-      const {userId = null, token = null} = action.data
-      
-      if (token) {
-        document.cookie = JSON.stringify({userId, token});
-        localStorage.setItem(localStorageName, JSON.stringify({userId, token}));
-        return { ...state, ...action.data, isRegistrate: true };
-      }
-      return { ...state, ...action.data, isRegistrate: false };
     case SET_LOAD_ME_DATA:
-      
+      debugger
       return {
         ...state,
         ...action.data,
         isRegistrate: true
       };
 
-    case REMOVE_TOKEN:
+    case LOAD_LOGOUT:
       
       localStorage.removeItem("userData");
       
@@ -48,7 +38,8 @@ export const authReducer = (state = initialState, action) => {
         password: null,
         message: null,
         cart: [],
-        isRegistrate: false, };
+        // isRegistrate: false, 
+      };
     default:
       return state;
   }

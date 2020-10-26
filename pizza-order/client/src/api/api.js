@@ -21,7 +21,7 @@ export const authAPI = {
   
   async registration(loginData) {
       
-    const response = await fetch('/auth/register', {
+    await fetch('/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -29,35 +29,42 @@ export const authAPI = {
       body: JSON.stringify(loginData)
       
     });
-    const userData = await response.json();
+    // const userData = await response.json();
     
-    return userData;
+    // return userData;
   },
 
   async login(loginData) {
-      debugger
-    const response = await fetch('/auth/login', {
+    
+    await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: JSON.stringify(loginData)
-      
+      body: JSON.stringify(loginData),
+      credentials: 'include'      
     });
     
-    const token = await response.json();
-    debugger
-    return token;
   },
-  async me(storedJwt) {
-    
-    const response = await fetch('/me', {
+
+  async logout(login) {
+   debugger
+    await fetch('http://localhost:3000/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
       },
-      body: storedJwt
-      // credentials: 'include'
+      body: JSON.stringify({email:login}),
+      credentials: 'include'      
+    });
+    
+  },
+
+  async me() {
+    
+    const response = await fetch('http://localhost:3000/me', {
+      
+      credentials: 'include'
       
     });
     

@@ -16,8 +16,8 @@ debugger
               
             </div>
             <div>
-              <div>
-                <NavLink to={`/drinks/${d._id}`}><h3>{d.name}</h3></NavLink>
+              <div className={style.productItem}>
+                <NavLink to={`/drinks/${d._id}`} className={style.name}><h3>{d.name}</h3></NavLink>
                 <h5> {d.volume} л </h5>
                 <h5>Цена {d.price} ₴</h5>
                 <NavLink to={"#"} activeClassName={style.submit} className={style.but}>В корзину</NavLink>

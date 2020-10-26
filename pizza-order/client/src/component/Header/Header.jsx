@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
   const logout = () => {
-    props.removeToken();
+    props.loadLogout(props.login);
   };
   return (
     <div className={s.AppHeader}>

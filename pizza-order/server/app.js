@@ -9,9 +9,9 @@ const mongoose = require("mongoose");
 
 const meRouter = require("./routes/me");
 const productRouter = require("./routes/product");
-const drinksRouter = require("./routes/drinks");
-const pizzaData = require("./db/pizza");
+const cartRouter = require("./routes/cart");
 const authRouter = require("./routes/auth");
+const authMiddleware = require("./middleware/auth.middleware");
 const app = express();
 
 // view engine setup
@@ -21,24 +21,22 @@ app.set("view engine", "jade");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true
-//   })
-// );
+
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+    ],
+    credentials: true
+  })
+);
 
 app.use("/product", productRouter);
 app.use("/auth", authRouter);
-app.use("/me", meRouter);
-// app.get("/pizzas/:id", (req, res) => {
-//   let id = req.params.id;
-//   let pizzaById = pizzaData.getpizzaById(id);
-//   res.json(pizzaById);
-// });
-app.use("/drinks", drinksRouter);
+app.use("/me", authMiddleware, meRouter);
+// app.use("/cart", cartRouter);
 
 async function start() {
   try {
